@@ -30,11 +30,11 @@ func (b Beans) Spill(enc, iv string) ([]byte, error) {
 	}
 
 	if len(encrypted) < aes.BlockSize {
-		return nil, errors.New("encrypted text is too small")
+		return nil, errors.New("encrypted text block size is too small")
 	}
 
 	if len(encrypted)%aes.BlockSize != 0 {
-		return nil, errors.New("encrypted text is not multiple of block size")
+		return nil, errors.New("encrypted text is not a multiple of the block size")
 	}
 
 	mode := cipher.NewCBCDecrypter(block, vector)
